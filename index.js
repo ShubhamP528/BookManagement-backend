@@ -10,7 +10,11 @@ const cors = require("cors");
 // Allow requests from the specified- origin
 app.use(
   cors({
-    origin: ["http://localhost:3001"],
+    origin: [
+      "http://localhost:3001",
+      "https://bookmanagemenr.netlify.app",
+      "https://book-management-frontend-wheat.vercel.app/",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
