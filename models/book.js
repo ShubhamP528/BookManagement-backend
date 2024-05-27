@@ -17,6 +17,10 @@ const schema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  price: {
+    type: Number,
+    required: true,
+  },
 });
 
 module.exports = mongoose.models.Book || mongoose.model("Book", schema);

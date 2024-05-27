@@ -2,10 +2,14 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const dbconnect = require("./config/database");
-const book = require("./routes/book");
-const user = require("./routes/user");
 // const seed = require("./seed");
 const cors = require("cors");
+// routes.
+const book = require("./routes/book");
+const user = require("./routes/user");
+const payment = require("./routes/payment");
+const cart = require("./routes/cart");
+const Order = require("./routes/order");
 
 // Allow requests from the specified- origin
 app.use(
@@ -28,6 +32,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(book);
 app.use(user);
+app.use(payment);
+app.use(cart);
+app.use(Order);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
