@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
+const helmet = require("helmet");
 const dbconnect = require("./config/database");
 // const seed = require("./seed");  // uncomment only for seeding the db
 const cors = require("cors");
@@ -22,6 +23,24 @@ app.use(
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'",
+        "https://js.stripe.com",
+        "blob:",
+      ],
+      connectSrc: ["'self'", "https://api.stripe.com"],
+      imgSrc: ["'self'", "data:", "https:"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+    },
   })
 );
 
