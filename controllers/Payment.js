@@ -9,6 +9,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const paymentrequest = async (req, res) => {
   try {
     const { products } = req.body;
+    console.log(req.body);
 
     const lineItems = products.map((product) => ({
       price_data: {
@@ -70,7 +71,5 @@ const PaymentSuccess = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-module.exports = PaymentSuccess;
 
 module.exports = { paymentrequest, PaymentSuccess };

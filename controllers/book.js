@@ -2,7 +2,6 @@ const Book = require("../models/book");
 
 const getBooks = async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
-  console.log(req.query, page, limit);
   try {
     const books = await Book.find()
       .limit(limit * 1)
