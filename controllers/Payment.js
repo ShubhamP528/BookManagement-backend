@@ -23,14 +23,12 @@ const paymentrequest = async (req, res) => {
       quantity: product.quantity,
     }));
 
-    console.log(lineItems);
-
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url: "http://localhost:3001/success",
-      cancel_url: "http://localhost:3001/cancel",
+      success_url: "https://bookmanagement528.netlify.app/success",
+      cancel_url: "https://bookmanagement528.netlify.app/cancel",
     });
 
     res.status(200).json({

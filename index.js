@@ -17,7 +17,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3001",
-      "https://bookmanagemenr.netlify.app",
+      "https://bookmanagement528.netlify.app/",
       "https://book-management-frontend-wheat.vercel.app/",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
