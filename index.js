@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const dbconnect = require("./config/database");
-// const seed = require("./seed");
+// const seed = require("./seed");  // uncomment only for seeding the db
 const cors = require("cors");
 // routes.
 const book = require("./routes/book");
@@ -13,24 +13,15 @@ const Order = require("./routes/order");
 
 // Allow requests from the specified- origin
 
-const allowedOrigins = [
-  "http://localhost:3001",
-  "https://bookmanagemenr.netlify.app",
-  "https://book-management-frontend-wheat.vercel.app/",
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // allow requests with no origin
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        const msg =
-          "The CORS policy for this site does not allow access from the specified Origin.";
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
+    origin: [
+      "http://localhost:3001",
+      "https://bookmanagemenr.netlify.app",
+      "https://book-management-frontend-wheat.vercel.app/",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -40,11 +31,11 @@ dbconnect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(book);
-app.use(user);
-app.use(payment);
-app.use(cart);
-app.use(Order);
+app.use("/api", book);
+app.use("/api", user);
+app.use("/api", payment);
+app.use("/api", cart);
+app.use("/api", Order);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
